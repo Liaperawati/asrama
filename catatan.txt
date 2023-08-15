@@ -1,0 +1,86 @@
+#############################
+
+* admin 1 (super admin) 
+- input data mahasiswa 
+- input pembayaran 
+- input data kamar
+- acc bukti pembayaran mahasiswa 
+- pokoknya semua dia yg punya akses
+
+* admin 2
+Cuman liat, yang buat akunnya adalah super admin
+
+* mahasiswa
+- resgis akun
+- membuat aduan
+- semuanya bisa dilihat mahasiswa tidak bisa melihat data mahasiswa lainnya
+- upload bukti pembayarn
+
+* pengawas (akun di buat oleh super admin) 
+- input data mahasiswa 
+- input data kamar
+- dapat melihat semua
+
+
+semua bisa liat aduan
+aduan ada status dibaca 
+
+
+
+
+#####################
+database : 
+#user 
+-id
+-nama
+-username
+-password
+-role [mahasiswa,admin1,admin2,pengawas]
+
+#detail_user
+-id 
+-user_id
+-nama_lengkap
+-jenis_kelamin
+-nohp
+-tempat_lahir
+-foto_ktp
+-foto_wajah
+
+#kamar				#DONE
+-id
+-nomor_kamar
+-bagian_kamar[atas,bawah]
+-tipe_kamar[cowo,cewe]
+-status
+
+#penghuni_kamar
+-id
+-user_id
+-kamar_id
+
+#pembayaran
+-id
+-kamar_id
+-user_id
+-tanggal_pembayaran
+-bukti_pembayaran
+-nominal
+-status
+
+#harga_pembayaran
+-id
+-nominal
+
+#jenis_aduan
+-id
+-nama_aduan
+
+#aduan
+-id
+-user_id
+-jenis_aduan_id
+-isi_aduan
+-status
+
+
