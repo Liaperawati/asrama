@@ -32,7 +32,7 @@
                             @if ($data_pembayaran == null)
                                 <p>Belum ada data</p>
                             @else
-                                Rp. {{ $data_pembayaran->nominal_pembayaran }}
+                            Rp. {{ number_format($data_pembayaran->nominal_pembayaran, 0, ',', '.') }}
                             @endif
                         </h3>
                     </div>
