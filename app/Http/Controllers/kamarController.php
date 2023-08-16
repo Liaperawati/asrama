@@ -34,9 +34,14 @@ class kamarController extends Controller
             'bagian_kamar' => 'required',
             'tipe_kamar' => 'required',
             'status' => 'required',
+            'kapasitas' => 'required',
         ]);
 
         $data = kamar::create($request->all());
+
+        if ($request->hasFile('gambar_kamar')) {
+            $data->addMediaFromRequest('gambar_kamar')->toMediaCollection('gambar_kamar');
+        }
 
         if ($data) {
             return redirect('/kamar')->with('success', 'Data berhasil ditambahkan');
@@ -69,22 +74,35 @@ class kamarController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // dd($request->all());
         $request->validate([
             'nomor_kamar' => 'required',
             'bagian_kamar' => 'required',
             'tipe_kamar' => 'required',
             'status' => 'required',
+            'kapasitas' => 'required',
         ]);
-
-        $data = kamar::find($id)->update($request->all());
-
-        if ($data) {
+    
+        $kamar = kamar::find($id);
+    
+        $updateResult = $kamar->update($request->all());
+    
+        if ($request->hasFile('gambar_kamar')) {
+            if ($updateResult) {
+                // Hapus gambar yang sudah ada sebelumnya
+                $kamar->clearMediaCollection('gambar_kamar');
+        
+                // Tambahkan gambar yang baru diunggah
+                $kamar->addMediaFromRequest('gambar_kamar')->toMediaCollection('gambar_kamar');
+            }
+        }
+    
+        if ($updateResult) {
             return redirect('/kamar')->with('success', 'Data berhasil diubah');
         } else {
             return redirect()->back()->with('failed', 'Data gagal diubah');
         }
     }
+    
 
     /**
      * Remove the specified resource from storage.

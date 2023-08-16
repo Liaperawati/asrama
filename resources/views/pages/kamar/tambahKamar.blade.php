@@ -11,7 +11,7 @@
                 <div class="card">
                     <div class="card-header">Form Tambah Kamar</div>
                     <div class="card-body">
-                        <form action="{{ url('upload-kamar') }}" method="POST">
+                        <form action="{{ url('upload-kamar') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row mb-3">
                                 <label for="nomor_kamar" class="col-sm-2 col-form-label"><b>NOMOR KAMAR</b></label>
@@ -42,6 +42,21 @@
                                 </div>
                             </div>
                             <input type="hidden" name="status" id="" value="kosong">
+
+                            <div class="row mb-3">
+                                <label for="kapasitas" class="col-sm-2 col-form-label"><b>KAPASITAS</b></label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" name="kapasitas" id="kapasitas"
+                                        placeholder="Masukan kapasitas.." required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="gambar_kamar" class="col-sm-2 col-form-label"><b>Gambar Kamar</b></label>
+                                <div class="col-sm-10">
+                                    <input type="file" class="form-control" name="gambar_kamar" id="gambar_kamar" accept="image/*">
+                                </div>
+                            </div>
+                            
 
                             <div class="mb-3 float-end">
                                 <a href="{{ url('kamar') }}" class="btn btn-danger">Batal</a>

@@ -11,7 +11,7 @@
                 <div class="card">
                     <div class="card-header">Form Edit Kamar</div>
                     <div class="card-body">
-                        <form action="{{ url('update-kamar', $data->id) }}" method="POST">
+                        <form action="{{ url('update-kamar', $data->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="row mb-3">
@@ -54,7 +54,26 @@
                                 </div>
                             </div>
 
+                            <div class="row mb-3">
+                                <label for="kapasitas" class="col-sm-2 col-form-label"><b>KAPASITAS</b></label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" name="kapasitas" id="kapasitas"
+                                        placeholder="Masukan kapasitas.."  value="{{ $data->kapasitas }}" required >
+                                </div>
+                            </div>
 
+                            <div class="row mb-3">
+                                <label for="gambar_kamar" class="col-sm-2 col-form-label"><b>Gambar Kamar</b></label>
+                                <div class="col-sm-10">
+                                    <input type="file" class="form-control" name="gambar_kamar" id="gambar_kamar" accept="image/*">
+                                    @if($data->getMedia('gambar_kamar')->count() > 0)
+                                        <div class="mt-2">
+                                            <img src="{{ $data->getFirstMedia('gambar_kamar')->getUrl() }}" alt="Gambar Kamar" style="max-width: 200px;">
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                                                   
 
 
                             <div class="mb-3 float-end">

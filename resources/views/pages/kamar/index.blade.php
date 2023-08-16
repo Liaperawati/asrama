@@ -1,5 +1,7 @@
 @php
     $data_kamar = App\Models\Kamar::all();
+
+    // dd($data_kamar);
 @endphp
 
 @extends('template.main')
@@ -33,8 +35,10 @@
                                         <tr>
                                             <th scope="col">No</th>
                                             <th scope="col">Nomor Kamar</th>
+                                            <th scope="col">Kapasitas</th>
                                             <th scope="col">Bagian Kamar</th>
                                             <th scope="col">Tipe Kamar</th>
+                                            <th scope="col">Gambar</th>
                                             <th scope="col">Status</th>
                                             <th scope="col">Aksi</th>
                                         </tr>
@@ -65,8 +69,14 @@
                                             <tr>
                                                 <th scope="row">{{ $loop->iteration }}</th>
                                                 <td>{{ $kamar->nomor_kamar }}</td>
+                                                <td>{{ $kamar->kapasitas }}</td>
                                                 <td>{{ $kamar->bagian_kamar }}</td>
                                                 <td>{{ $kamar->tipe_kamar }}</td>
+                                                <td>
+                                                    @foreach ($kamar->getMedia('gambar_kamar') as $media)
+                                                        <img src="{{ $media->getUrl() }}" alt="Gambar Kamar" style="max-width: 100px;">
+                                                    @endforeach
+                                                </td>
                                                 <td>
                                                     {{-- badge --}}
                                                     @if ($kamar->status == 'kosong')
