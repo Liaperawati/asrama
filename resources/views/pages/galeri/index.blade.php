@@ -37,6 +37,7 @@
                         <tr>
                             <th>No</th>
                             <th>foto</th>
+                            <th>penjelasan</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -45,6 +46,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->foto }}</td>
+                                <td>{{ $item->penjelasan }}</td>
                                 <td>
                                     <div class="dropdown float-end">
                                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuButton1"
@@ -88,6 +90,10 @@
                                                     <label for="gambar" class="form-label">gambar</label>
                                                     <input type="file" class="form-control" id="gambar"
                                                         name="gambar">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="penjelasan" class="form-label">Penjelasan</label>
+                                                    <textarea class="form-control" id="penjelasan" name="penjelasan" rows="4">{{ $item->penjelasan }}</textarea>
                                                 </div>
                                                 <img src="{{ asset('img/foto_galeri') }}/{{ $item->foto }}" alt=""
                                                     width="20%">
@@ -157,6 +163,10 @@
                         <div class="mb-3">
                             <label for="gambar" class="form-label">gambar</label>
                             <input type="file" class="form-control" id="gambar" name="gambar">
+                        </div>
+                        <div class="mb-3">
+                            <label for="penjelasan" class="form-label">Penjelasan</label>
+                            <textarea class="form-control" id="penjelasan" name="penjelasan" rows="4">{{ $item->penjelasan }}</textarea>
                         </div>
 
                     </div>

@@ -31,7 +31,6 @@ class galeriController extends Controller
     {
         $request->validate([
             'gambar' => 'required|mimes:png,jpg,jpeg',
-
         ]);
 
 
@@ -45,6 +44,7 @@ class galeriController extends Controller
         galeri::create(
             [
                 'foto' => $nama_gambar,
+                'penjelasan' => $request->penjelasan,
             ]
         );
 
@@ -73,23 +73,31 @@ class galeriController extends Controller
     public function update(Request $request, string $id)
     {
 
-        $request->validate([
-            'gambar' => 'required|mimes:png,jpg,jpeg',
+        // $request->validate([
+        //     'gambar' => 'mimes:png,jpg,jpeg',
 
-        ]);
+        // ]);
 
-
-        $gambar = $request->file('gambar');
-
-
-        $nama_gambar = time() . "_" . $gambar->getClientOriginalName();
-        $gambar->move('img/foto_galeri', $nama_gambar);
+        
 
         galeri::find($id)->update(
             [
-                'foto' => $nama_gambar,
+                'penjelasan' => $request->penjelasan,
             ]
         );
+
+        if ($request->hasFile('gambar')) {
+            $gambar = $request->file('gambar');
+
+            $nama_gambar = time() . "_" . $gambar->getClientOriginalName();
+            $gambar->move('img/foto_galeri', $nama_gambar);
+
+            galeri::find($id)->update(
+                [
+                    'foto' => $nama_gambar
+                ]
+            );
+        }
 
         return redirect('/data-galeri')->with('success', 'Gambar Berhasil Diupdate.');
     }

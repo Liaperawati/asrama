@@ -90,6 +90,7 @@
                                     <th scope="col">No</th>
                                     <th scope="col">Nama</th>
                                     <th scope="col">No. Kamar</th>
+                                    <th scope="col">Tanggal Pembayaran</th>
                                     <th scope="col">Tagihan</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Aksi</th>
@@ -115,6 +116,7 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $data_user->nama_lengkap }}</td>
                                         <td>{{ $data_kamar->nomor_kamar }}</td>
+                                        <td>{{ $item->tanggal }}</td>
                                         <td>Rp. {{ $item->nominal }}</td>
                                         <td>
                                             @if ($item->status == 'menunggu')

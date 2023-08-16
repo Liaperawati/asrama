@@ -31,7 +31,7 @@
                 <div class="col">
                     <div class="card h-100">
                         <img src="{{ asset('img/foto_galeri') }}/{{ $item->foto }}" class="" alt="...">
-
+                        <center> <h4>{{ $item->penjelasan }}</h4></center>
                     </div>
                 </div>
             @endforeach
