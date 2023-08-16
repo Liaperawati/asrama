@@ -18,9 +18,9 @@
                                     <th scope="col">Isi Aduan</th>
                                     <th scope="col">Foto / Lampiran</th>
                                     <th scope="col">Status</th>
-                                    @if (Auth::user()->role != 'mahasiswa')
-                                        <th scope="col">Aksi</th>
-                                    @endif
+                                    {{-- @if (Auth::user()->role != 'mahasiswa') --}}
+                                    <th scope="col">Aksi</th>
+                                    {{-- @endif --}}
                                 </tr>
                             </thead>
                             <tbody>
@@ -38,19 +38,21 @@
                                                 <span class="badge bg-success">{{ $item->status }}</span>
                                             @endif
                                         </td>
-                                        @if (Auth::user()->role != 'mahasiswa')
-                                            <td>
-                                                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                                    data-bs-target="#show{{ $item->id }}">
-                                                    Detail
-                                                </button>
+
+                                        <td>
+                                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                                data-bs-target="#show{{ $item->id }}">
+                                                Detail
+                                            </button>
+                                            @if (Auth::user()->role != 'mahasiswa')
                                                 <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
                                                     data-bs-target="#delete{{ $item->id }}">
                                                     Delete
                                                 </button>
-                                            </td>
-                                            
-                                        @endif
+                                            @endif
+                                        </td>
+
+
 
                                     </tr>
                                     <!-- Modal -->
@@ -109,8 +111,10 @@
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary"
                                                             data-bs-dismiss="modal">Close</button>
-                                                        <button type="submit" class="btn btn-primary">Tandai Sudah
-                                                            Dibaca</button>
+                                                        @if (Auth::user()->role != 'mahasiswa')
+                                                            <button type="submit" class="btn btn-primary">Tandai Sudah
+                                                                Dibaca</button>
+                                                        @endif
                                                     </div>
                                                 </form>
                                             </div>
@@ -164,9 +168,9 @@
             $('#example').DataTable();
         });
     </script>
-     @if (session()->has('success'))
-     <script>
-         toastr.success(`{{ session('success') }}`);
-     </script>
- @endif
+    @if (session()->has('success'))
+        <script>
+            toastr.success(`{{ session('success') }}`);
+        </script>
+    @endif
 @endsection
