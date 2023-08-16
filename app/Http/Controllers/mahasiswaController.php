@@ -103,38 +103,33 @@ class mahasiswaController extends Controller
             'foto_ktp' => 'mimes:png,jpg',
         ]);
 
-        // jika foto ktp kosong
-        if ($request->foto_ktp == null) {
-            $foto_ktp = $request->foto_ktp_lama;
-            $nama_file_ktp = $foto_ktp;
-        } else {
+        $data = dataUser::find($id);
+
+        // Memeriksa dan mengelola gambar KTP
+        if ($request->hasFile('foto_ktp')) {
             $foto_ktp = $request->file('foto_ktp');
             $nama_file_ktp = time() . "_" . $foto_ktp->getClientOriginalName();
             $foto_ktp->move('img/foto_ktp', $nama_file_ktp);
+            $data->foto_ktp = $nama_file_ktp;
         }
 
-        // jika foto wajah kosong
-        if ($request->foto_wajah == null) {
-            $foto_wajah = $request->foto_wajah_lama;
-            $nama_file_wajah = $foto_wajah;
-        } else {
+        // Memeriksa dan mengelola gambar Wajah
+        if ($request->hasFile('foto_wajah')) {
             $foto_wajah = $request->file('foto_wajah');
             $nama_file_wajah = time() . "_" . $foto_wajah->getClientOriginalName();
             $foto_wajah->move('img/foto_wajah', $nama_file_wajah);
+            $data->foto_wajah = $nama_file_wajah;
         }
 
-        dataUser::where('id', $id)->update(
-            [
-                'nama_lengkap' => $request->nama_lengkap,
-                'jenis_kelamin' => $request->jenis_kelamin,
-                'tempat_lahir' => $request->tempat_lahir,
-                'foto_wajah' => $nama_file_wajah,
-                'foto_ktp' => $nama_file_ktp,
-            ]
-        );
+        // Update data lainnya
+        $data->nama_lengkap = $request->nama_lengkap;
+        $data->jenis_kelamin = $request->jenis_kelamin;
+        $data->tempat_lahir = $request->tempat_lahir;
+        $data->save();
 
         return redirect('data-mahasiswa')->with('success', 'Data Berhasil Diubah');
     }
+
 
     /**
      * Remove the specified resource from storage.
