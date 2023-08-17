@@ -60,6 +60,58 @@
                                 </div>
                             </div>
 
+                            <div class="row mb-3">
+                                <label for="tanggal_lahir" class="col-sm-2 col-form-label"><b>Tanggal Lahir</b></label>
+                                <div class="col-sm-10">
+                                    <input type="date" class="form-control" name="tanggal_lahir" id="tanggal_lahir"
+                                        required>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="nim" class="col-sm-2 col-form-label"><b>NIM</b></label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="nim" id="nim" required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="prodi" class="col-sm-2 col-form-label"><b>Prodi</b></label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="prodi" id="prodi" required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="agama" class="col-sm-2 col-form-label"><b>Agama</b></label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="agama" id="agama" required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="no_hp" class="col-sm-2 col-form-label"><b>No. HP</b></label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="no_hp" id="no_hp" required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="asal_sekolah" class="col-sm-2 col-form-label"><b>Asal Sekolah</b></label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="asal_sekolah" id="asal_sekolah" required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="status_pembayaran" class="col-sm-2 col-form-label"><b>Status Pembayaran</b></label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="status_pembayaran" id="status_pembayaran" required>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="alamat" class="col-sm-2 col-form-label"><b>Alamat</b></label>
+                                <div class="col-sm-10">
+                                    <textarea name="alamat" id="alamat" cols="30" rows="5" class="form-control" required></textarea>
+                                </div>
+                            </div>
+
 
                             <input type="hidden" name="user_id" id="" value="{{ $data->id }}">
 

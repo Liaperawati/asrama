@@ -13,7 +13,9 @@
                     memberikan tanggapan
                     atas aduan dari saudara</p>
                 <center>
-                    <a href="{{ url('add-aduan') }}" class="btn btn-success "> Buat Aduan</a>
+                    @if (Auth::user()->role == 'mahasiswa')
+                        <a href="{{ url('add-aduan') }}" class="btn btn-success "> Buat Aduan</a>
+                    @endif
                     <a href="{{ url('data-aduan') }}" class="btn btn-primary "> Data Aduan</a>
                 </center>
             </div>

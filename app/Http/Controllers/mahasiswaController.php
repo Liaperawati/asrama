@@ -37,9 +37,16 @@ class mahasiswaController extends Controller
             'nama_lengkap' => 'required',
             'jenis_kelamin' => 'required',
             'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required|date',
+            'nim' => 'required',
+            'prodi' => 'required',
+            'agama' => 'required',
+            'no_hp' => 'required',
+            'asal_sekolah' => 'required',
+            'status_pembayaran' => 'required',
             'foto_wajah' => 'required|mimes:png,jpg,jpeg',
             'foto_ktp' => 'required|mimes:png,jpg,jpeg',
-
+            'alamat' => 'required',
         ]);
 
 
@@ -52,19 +59,22 @@ class mahasiswaController extends Controller
         $foto_wajah->move('img/foto_wajah', $nama_file_wajah);
         $foto_ktp->move('img/foto_ktp', $nama_file_ktp);
 
-
-
-
-        $dataSave = dataUser::create(
-            [
-                'nama_lengkap' => $request->nama_lengkap,
-                'jenis_kelamin' => $request->jenis_kelamin,
-                'tempat_lahir' => $request->tempat_lahir,
-                'foto_wajah' => $nama_file_wajah,
-                'foto_ktp' => $nama_file_ktp,
-                'user_id' => $id,
-            ]
-        );
+        $dataSave = dataUser::create([
+            'nama_lengkap' => $request->nama_lengkap,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'tempat_lahir' => $request->tempat_lahir,
+            'tanggal_lahir' => $request->tanggal_lahir,
+            'nim' => $request->nim,
+            'program_studi' => $request->prodi,
+            'agama' => $request->agama,
+            'no_hp' => $request->no_hp,
+            'asal_sekolah' => $request->asal_sekolah,
+            'status_pembayaran' => $request->status_pembayaran,
+            'foto_wajah' => $nama_file_wajah,
+            'foto_ktp' => $nama_file_ktp,
+            'alamat' => $request->alamat,
+            'user_id' => $id,
+        ]);
 
         if ($dataSave) {
             return redirect('data-mahasiswa')->with('success', 'Data Berhasil Ditambahkan');
@@ -103,38 +113,44 @@ class mahasiswaController extends Controller
             'foto_ktp' => 'mimes:png,jpg',
         ]);
 
-        // jika foto ktp kosong
-        if ($request->foto_ktp == null) {
-            $foto_ktp = $request->foto_ktp_lama;
-            $nama_file_ktp = $foto_ktp;
-        } else {
+        $data = dataUser::find($id);
+
+        // Memeriksa dan mengelola gambar KTP
+        if ($request->hasFile('foto_ktp')) {
             $foto_ktp = $request->file('foto_ktp');
             $nama_file_ktp = time() . "_" . $foto_ktp->getClientOriginalName();
             $foto_ktp->move('img/foto_ktp', $nama_file_ktp);
+            $data->foto_ktp = $nama_file_ktp;
         }
 
-        // jika foto wajah kosong
-        if ($request->foto_wajah == null) {
-            $foto_wajah = $request->foto_wajah_lama;
-            $nama_file_wajah = $foto_wajah;
-        } else {
+        // Memeriksa dan mengelola gambar Wajah
+        if ($request->hasFile('foto_wajah')) {
             $foto_wajah = $request->file('foto_wajah');
             $nama_file_wajah = time() . "_" . $foto_wajah->getClientOriginalName();
             $foto_wajah->move('img/foto_wajah', $nama_file_wajah);
+            $data->foto_wajah = $nama_file_wajah;
         }
 
-        dataUser::where('id', $id)->update(
-            [
-                'nama_lengkap' => $request->nama_lengkap,
-                'jenis_kelamin' => $request->jenis_kelamin,
-                'tempat_lahir' => $request->tempat_lahir,
-                'foto_wajah' => $nama_file_wajah,
-                'foto_ktp' => $nama_file_ktp,
-            ]
-        );
+        // Update data lainnya
+        $data->nama_lengkap = $request->nama_lengkap;
+        $data->jenis_kelamin = $request->jenis_kelamin;
+        $data->tempat_lahir = $request->tempat_lahir;
+
+        // Update data tambahan
+        $data->tanggal_lahir = $request->tanggal_lahir;
+        $data->nim = $request->nim;
+        $data->program_studi = $request->prodi;
+        $data->agama = $request->agama;
+        $data->no_hp = $request->no_hp;
+        $data->asal_sekolah = $request->asal_sekolah;
+        $data->status_pembayaran = $request->status_pembayaran;
+        $data->alamat = $request->alamat;
+
+        $data->save();
 
         return redirect('data-mahasiswa')->with('success', 'Data Berhasil Diubah');
     }
+
 
     /**
      * Remove the specified resource from storage.

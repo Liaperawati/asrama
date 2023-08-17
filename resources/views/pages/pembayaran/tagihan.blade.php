@@ -111,11 +111,12 @@
                                         $data_user = DB::table('data_users')
                                             ->where('user_id', $item->user_id)
                                             ->first();
+                                        // {{ dd( $item );}}
                                     @endphp
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $data_user->nama_lengkap }}</td>
-                                        <td>{{ $data_kamar->nomor_kamar }}</td>
+                                        <td>{{ $data_kamar->nomor_kamar ?? '-' }}</td>
                                         <td>{{ $item->tanggal }}</td>
                                         <td>Rp. {{ $item->nominal }}</td>
                                         <td>

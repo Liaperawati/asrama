@@ -52,12 +52,12 @@
                                                     ->where('kamar_id', $kamar->id)
                                                     ->get();
                                                 
-                                                if (count($data_penghuni_kamar) == 0) {
-                                                    $status = 'kosong';
-                                                } elseif (count($data_penghuni_kamar) == 1) {
-                                                    $status = 'kurang 1';
-                                                } elseif (count($data_penghuni_kamar) == 2) {
-                                                    $status = 'penuh';
+                                                if ($kamar->kapasitas == count($data_penghuni_kamar)) {
+                                                    $status = 'Penuh';
+                                                } elseif (count($data_penghuni_kamar) == 0) {
+                                                    $status = 'Kosong';
+                                                } elseif ($kamar->kapasitas > count($data_penghuni_kamar)) {
+                                                    $status = 'Kurang ' . $kamar->kapasitas - count($data_penghuni_kamar);
                                                 }
                                                 
                                                 DB::table('kamars')
@@ -79,12 +79,12 @@
                                                 </td>
                                                 <td>
                                                     {{-- badge --}}
-                                                    @if ($kamar->status == 'kosong')
+                                                    @if ($kamar->status == 'Kosong')
                                                         <span class="badge bg-success">{{ $kamar->status }}</span>
-                                                    @elseif ($kamar->status == 'kurang 1')
-                                                        <span class="badge bg-warning">{{ $kamar->status }}</span>
-                                                    @elseif ($kamar->status == 'penuh')
+                                                    @elseif ($kamar->status == 'Penuh')
                                                         <span class="badge bg-danger">{{ $kamar->status }}</span>
+                                                    @else
+                                                        <span class="badge bg-warning">{{ $kamar->status }}</span>
                                                     @endif
                                                 </td>
                                                 <td>
