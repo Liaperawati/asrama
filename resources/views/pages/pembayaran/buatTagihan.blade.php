@@ -8,15 +8,12 @@
     $user_id = Auth::user()->id;
     
     $data_kamar = DB::table('penghuni_kamars')
-        ->where('user_id', $user_id)
-        ->first();
-        // dd($data_kamar);
+    ->where('user_id', $user_id)
+    ->first();
     
     $detail_kamar = DB::table('kamars')
-        ->where('id', $data_kamar->kamar_id)
-        ->first();
-        // dd($detail_kamar);
-    
+    ->where('id', $data_kamar->kamar_id)
+    ->first();
     $data_diri = DB::table('data_users')
         ->where('user_id', $user_id)
         ->first();

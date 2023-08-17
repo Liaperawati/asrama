@@ -11,7 +11,8 @@
                 <div class="card">
                     <div class="card-header"><b>Form Edit Mahasiswa</b></div>
                     <div class="card-body">
-                        <form action="{{ url('update-data-mahasiswa', $data->id) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ url('update-data-mahasiswa', $data->id) }}" method="POST"
+                            enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="row mb-3">
@@ -33,12 +34,14 @@
                                 <div class="col-sm-10">
                                     <select name="jenis_kelamin" class="form-select" id="">
                                         <option value="">Pilih --- </option>
-                                        <option value="Laki-laki" {{ $data->jenis_kelamin === 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
-                                        <option value="Perempuan" {{ $data->jenis_kelamin === 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
+                                        <option value="Laki-laki"
+                                            {{ $data->jenis_kelamin === 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
+                                        <option value="Perempuan"
+                                            {{ $data->jenis_kelamin === 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
                                     </select>
                                 </div>
                             </div>
-                            
+
                             <div class="row mb-3">
                                 <label for="tempat_lahir" class="col-sm-2 col-form-label"><b>Tempat Lahir</b></label>
                                 <div class="col-sm-10">
@@ -49,13 +52,14 @@
                             <div class="row mb-3">
                                 <label for="foto_wajah" class="col-sm-2 col-form-label"><b>Foto Wajah</b></label>
                                 <div class="col-sm-10">
-                                    <input type="file" class="form-control" name="foto_wajah" id="foto_wajah" placeholder="Ex : Nama Kota">
+                                    <input type="file" class="form-control" name="foto_wajah" id="foto_wajah"
+                                        placeholder="Ex : Nama Kota">
                                     @if ($data->foto_wajah)
                                         <small>Gambar saat ini: {{ $data->foto_wajah }}</small>
                                     @endif
                                 </div>
                             </div>
-                            
+
                             <div class="row mb-3">
                                 <label for="foto_ktp" class="col-sm-2 col-form-label"><b>Foto KTP</b></label>
                                 <div class="col-sm-10">
@@ -65,7 +69,64 @@
                                     @endif
                                 </div>
                             </div>
-                            
+
+                            <div class="row mb-3">
+                                <label for="tanggal_lahir" class="col-sm-2 col-form-label"><b>Tanggal Lahir</b></label>
+                                <div class="col-sm-10">
+                                    <input type="date" class="form-control" name="tanggal_lahir" id="tanggal_lahir"
+                                        value="{{ $data->tanggal_lahir }}" required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="nim" class="col-sm-2 col-form-label"><b>NIM</b></label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="nim" id="nim"
+                                        value="{{ $data->nim }}" required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="prodi" class="col-sm-2 col-form-label"><b>Prodi</b></label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="prodi" id="prodi"
+                                        value="{{ $data->program_studi }}" required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="agama" class="col-sm-2 col-form-label"><b>Agama</b></label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="agama" id="agama"
+                                        value="{{ $data->agama }}" required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="no_hp" class="col-sm-2 col-form-label"><b>No. HP</b></label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="no_hp" id="no_hp"
+                                        value="{{ $data->no_hp }}" required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="asal_sekolah" class="col-sm-2 col-form-label"><b>Asal Sekolah</b></label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="asal_sekolah" id="asal_sekolah"
+                                        value="{{ $data->asal_sekolah }}" required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="status_pembayaran" class="col-sm-2 col-form-label"><b>Status Pembayaran</b></label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="status_pembayaran" id="status_pembayaran"
+                                        value="{{ $data->status_pembayaran }}" required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="alamat" class="col-sm-2 col-form-label"><b>Alamat</b></label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" name="alamat" id="alamat" rows="3"
+                                        required>{{ $data->alamat }}</textarea>
+                                </div>
+                            </div>
+
 
                             <input type="hidden" name="user_id" id="" value="{{ $data->id }}">
 

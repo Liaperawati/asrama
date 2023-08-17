@@ -111,7 +111,7 @@
                                         $data_user = DB::table('data_users')
                                             ->where('user_id', $item->user_id)
                                             ->first();
-                                        
+                                        // {{ dd( $item );}}
                                     @endphp
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>

@@ -67,6 +67,7 @@
                     class="nav-item nav-link  @if (request()->is('lihat-pembayaran')) active @endif">
                     <i class="fa fa-dollar-sign me-2"></i>Pembayaran
                 </a>
+                
                 <a href="{{ url('aduan') }}"
                     class="nav-item nav-link text-danger  @if (request()->is('aduan')) active @endif">
                     <i class="fa fa-notes-medical me-2"></i>Aduan ?
