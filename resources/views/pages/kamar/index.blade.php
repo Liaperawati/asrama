@@ -57,7 +57,7 @@
                                                 } elseif (count($data_penghuni_kamar) == 0) {
                                                     $status = 'Kosong';
                                                 } elseif ($kamar->kapasitas > count($data_penghuni_kamar)) {
-                                                    $status = 'Kurang ' . $kamar->kapasitas - count($data_penghuni_kamar);
+                                                    $status = 'Kurang ' . $kamar->kapasixtas - count($data_penghuni_kamar);
                                                 }
                                                 
                                                 DB::table('kamars')
